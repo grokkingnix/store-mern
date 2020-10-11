@@ -18,4 +18,5 @@ main {
 }
 .thumbnail:hover {
     outline-style: solid;
+    transition: outline .1s;
 }
