@@ -20,3 +20,9 @@ main {
     outline-style: solid;
     transition: outline .1s;
 }
+#mainImg {
+    position: absolute;
+}
+#imgContainer {
+    overflow: hidden;
+}

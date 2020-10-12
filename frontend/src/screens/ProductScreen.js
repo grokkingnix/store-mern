@@ -6,12 +6,29 @@ import products from '../products';
 
 function ProductScreen({match}) {
     const product = products.find(p => p._id === match.params.id);
+    let num = 0;
+    function updateProductImage(e) {
+	let imgPath = e.attributes.src.value;
+	num = product.image.indexOf(imgPath)
+	document.querySelector("#mainImg").src = product.image[num];
+    }
+    function zoomProductImage(e) {
+	let zoomImg = document.querySelector("#mainImg");
+	zoomImg.style.transform = 'scale(3)';
+    }
+    function unzoomProductImage() {
+	let zoomImg = document.querySelector("#mainImg");
+	zoomImg.style.transform = 'scale(1)';
+	zoomImg.style.left = '0px';
+	zoomImg.style.top = '0px';
+    }
+    
     return (
 	<React.Fragment>
 	    <Link className="btn btn-light my-3" to="/">Go Back</Link>
 	    <Row>
-		<Col md={6}>
-		    <Image src={product.image[0]} alt={product.name} fluid/>
+		<Col md={6} id="imgContainer">
+		    <Image onMouseMove={e => zoomProductImage(e)} onMouseLeave={unzoomProductImage} id="mainImg" src={product.image[num]} alt={product.name} fluid/>
 		</Col>
 		<Col md={3}>
 		    <ListGroup variant="flush">
@@ -63,11 +80,11 @@ function ProductScreen({match}) {
 	    </Row>
 	    <Row>
 		<Col md={6}>
-		<Image className="thumbnail" md={1} src={product.image[0]} fluid/>
-		<Image className="thumbnail" md={1} src={product.image[1]} fluid/>
-		<Image className="thumbnail" md={1} src={product.image[2]} fluid/>
-		<Image className="thumbnail" md={1} src={product.image[3]} fluid/>
-		<Image className="thumbnail" md={1} src={product.image[4]} fluid/>
+		<Image className="thumbnail" onClick={e => updateProductImage(e.target)} md={1} src={product.image[0]} fluid/>
+		<Image className="thumbnail" onClick={e => updateProductImage(e.target)} md={1} src={product.image[1]} fluid/>
+		<Image className="thumbnail" onClick={e => updateProductImage(e.target)} md={1} src={product.image[2]} fluid/>
+		<Image className="thumbnail" onClick={e => updateProductImage(e.target)} md={1} src={product.image[3]} fluid/>
+		<Image className="thumbnail" onClick={e => updateProductImage(e.target)} md={1} src={product.image[4]} fluid/>
 		    </Col>
 	    </Row>
 	</React.Fragment>
