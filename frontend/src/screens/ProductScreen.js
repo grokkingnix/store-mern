@@ -13,8 +13,16 @@ function ProductScreen({match}) {
 	document.querySelector("#mainImg").src = product.image[num];
     }
     function zoomProductImage(e) {
+	let clientX, clientY, zoomWidth, zoomHeight;
 	let zoomImg = document.querySelector("#mainImg");
-	zoomImg.style.transform = 'scale(3)';
+	let zoomArea = document.querySelector("#imgContainer");
+	clientX = e.clientX - zoomArea.offsetLeft;
+	clientY = e.clientY - zoomArea.offsetTop;
+	zoomWidth = zoomArea.offsetWidth;
+	zoomHeight = zoomArea.offsetHeight;
+	clientX = clientX / zoomWidth * 100;
+	clientY = clientY / zoomHeight * 100;
+	zoomImg.style.transform = 'translate(-'+clientX+'%, -'+clientY+'%) scale(3)';
     }
     function unzoomProductImage() {
 	let zoomImg = document.querySelector("#mainImg");
