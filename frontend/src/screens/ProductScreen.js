@@ -13,21 +13,31 @@ function ProductScreen({match}) {
 	document.querySelector("#mainImg").src = product.image[num];
     }
     function zoomProductImage(e) {
-	let clientX, clientY, zoomWidth, zoomHeight;
+	let clientX, clientY, zoomWidth, zoomHeight, finalX, finalY;
 	let zoomImg = document.querySelector("#mainImg");
 	let zoomArea = document.querySelector("#imgContainer");
 	clientX = e.clientX - zoomArea.offsetLeft;
 	clientY = e.clientY - zoomArea.offsetTop;
+	console.log("clientY= "+clientY);
+	console.log("clientX= "+clientX);
+	console.log("zoomAreaoffsetLeft="+ zoomArea.offsetLeft);
+	console.log("zoomAreaoffsetTop="+ zoomArea.offsetTop);
 	zoomWidth = zoomArea.offsetWidth;
 	zoomHeight = zoomArea.offsetHeight;
-	clientX = clientX / zoomWidth * 100;
-	clientY = clientY / zoomHeight * 100;
-	zoomImg.style.transform = 'translate(-'+clientX+'%, -'+clientY+'%) scale(3)';
+	console.log("zoomWidth= "+zoomWidth);
+	console.log("zoomHeight= "+zoomHeight);
+	finalX = clientX / zoomWidth * 100;
+	finalY = (clientY / zoomHeight * 100) + 25;
+	console.log("finalY= "+finalY);
+	console.log("finalX= "+finalX);
+	zoomImg.style.transform = 'translate(-'+finalX+'%, -'+finalY+'%) scale(4)';
+	zoomImg.style.margin = '0 0 0 382px';
 	zoomImg.style.transition = '.09s';
     }
     function unzoomProductImage() {
 	let zoomImg = document.querySelector("#mainImg");
 	zoomImg.style.transform = 'scale(1)';
+	zoomImg.style.margin = '0';
 	zoomImg.style.left = '0px';
 	zoomImg.style.top = '0px';
     }
@@ -73,7 +83,7 @@ function ProductScreen({match}) {
 				   <Col>
 				       Status:
 			    	   </Col>
-			    	   <Col>
+				    <Col className={product.stock > 0 ? 'inStock' : 'outOfStock'}>
 				       {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
 			    	   </Col>
 			        </Row>

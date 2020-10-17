@@ -23,3 +23,9 @@ main {
 #imgContainer {
     overflow: hidden;
 }
+.inStock {
+    color:green;
+}
+.outOfStock {
+    color:red;
+}
