@@ -23,6 +23,7 @@ function ProductScreen({match}) {
 	clientX = clientX / zoomWidth * 100;
 	clientY = clientY / zoomHeight * 100;
 	zoomImg.style.transform = 'translate(-'+clientX+'%, -'+clientY+'%) scale(3)';
+	zoomImg.style.transition = '.09s';
     }
     function unzoomProductImage() {
 	let zoomImg = document.querySelector("#mainImg");
